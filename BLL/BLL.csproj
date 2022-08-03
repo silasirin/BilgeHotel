@@ -51,7 +51,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Concrete\CalisanConcrete.cs" />
+    <Compile Include="Concrete\MusteriBilgisiConcrete.cs" />
     <Compile Include="Concrete\OdaConcrete.cs" />
+    <Compile Include="Concrete\RezervasyonConcrete.cs" />
+    <Compile Include="Concrete\TatilPaketiConcrete.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Base\BaseRepository.cs" />
     <Compile Include="Base\IRepository.cs" />

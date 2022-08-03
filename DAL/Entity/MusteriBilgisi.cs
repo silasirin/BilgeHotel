@@ -8,7 +8,7 @@ namespace DAL.Entity
 {
     public class MusteriBilgisi: BaseEntity
     {
-        //Burasi AppUser
+        //Burasi UserVM icin de kullanilacak olan bilgileri iceriyor.
         public int MusteriID { get; set; }
         public string TCKN { get; set; }
         public string Ad { get; set; }
