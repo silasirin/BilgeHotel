@@ -123,7 +123,7 @@ namespace MVC.Controllers
             foreach (var item in cart.myCart)
             {
                 Oda oda = db.Odalar.Find(item.OdaID);
-                oda.OdaSayisi -= Convert.ToInt16(item.OdaSayisi); //stogu adet kadar dusur
+                oda.OdaSayisi -= item.OdaSayisi; //stogu adet kadar dusur
                 db.Entry(oda).State = System.Data.Entity.EntityState.Modified; //degisiklikleri sisteme modifiye et.
                 db.SaveChanges(); //kaydet
                 Session.Remove("scart"); //scard isimli session'i bosalt.
