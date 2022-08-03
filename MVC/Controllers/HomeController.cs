@@ -42,6 +42,27 @@ namespace MVC.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult Register(UserVM userVM)
+        {
+            if (ModelState.IsValid)
+            {
+                MusteriBilgisi appUser = new MusteriBilgisi();
+                appUser.Email = userVM.Email;
+                appUser.Sifre = userVM.Sifre;
+                var result = musteriConcrete.Create(appUser);
+                TempData["info"] = result;
+
+
+                return RedirectToAction("Index");
+
+            }
+            else
+            {
+                return View(userVM);
+            }
+        }
+
         //Cart'a ekleme islemleri
         public ActionResult AddToCart(int id)
         {
@@ -108,27 +129,6 @@ namespace MVC.Controllers
                 Session.Remove("scart"); //scard isimli session'i bosalt.
             }
             return View();
-        }
-
-        [HttpPost]
-        public ActionResult Register(UserVM userVM)
-        {
-            if (ModelState.IsValid)
-            {
-                MusteriBilgisi appUser = new MusteriBilgisi();
-                appUser.Email = userVM.Email;
-                appUser.Sifre = userVM.Sifre;
-                var result = musteriConcrete.Create(appUser);
-                TempData["info"] = result;
-
-
-                return RedirectToAction("Index");
-
-            }
-            else
-            {
-                return View(userVM);
-            }
         }
 
         //Login islemleri
