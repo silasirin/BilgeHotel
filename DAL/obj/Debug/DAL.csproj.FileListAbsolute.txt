@@ -1,0 +1,14 @@
+C:\Users\Sıla Şirin\Desktop\BilgeHotel\DAL\bin\Debug\DAL.dll.config
+C:\Users\Sıla Şirin\Desktop\BilgeHotel\DAL\bin\Debug\DAL.dll
+C:\Users\Sıla Şirin\Desktop\BilgeHotel\DAL\bin\Debug\DAL.pdb
+C:\Users\Sıla Şirin\Desktop\BilgeHotel\DAL\bin\Debug\EntityFramework.dll
+C:\Users\Sıla Şirin\Desktop\BilgeHotel\DAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Sıla Şirin\Desktop\BilgeHotel\DAL\bin\Debug\EntityFramework.xml
+C:\Users\Sıla Şirin\Desktop\BilgeHotel\DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Sıla Şirin\Desktop\BilgeHotel\DAL\obj\Debug\DAL.csproj.AssemblyReference.cache
+C:\Users\Sıla Şirin\Desktop\BilgeHotel\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+C:\Users\Sıla Şirin\Desktop\BilgeHotel\DAL\obj\Debug\DAL.csproj.CopyComplete
+C:\Users\Sıla Şirin\Desktop\BilgeHotel\DAL\obj\Debug\DAL.dll
+C:\Users\Sıla Şirin\Desktop\BilgeHotel\DAL\obj\Debug\DAL.pdb
+C:\Users\Sıla Şirin\Desktop\BilgeHotel\DAL\obj\Debug\DAL.LoginForm.resources
+C:\Users\Sıla Şirin\Desktop\BilgeHotel\DAL\obj\Debug\DAL.csproj.GenerateResource.cache
