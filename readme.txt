@@ -52,6 +52,10 @@ BILGE ADAM RESORT MVC PROJESI
 
 23- Cart'a rezervasyon bilgileri eklenirken kullanilmasi icin CartVM class'i olusturuldu.
 
-24- HomeController icerisinde musteri girisi icin Cart, Register, Login Controller'lari olusturuldu.
+24- HomeController icerisinde musteri girisi icin Index, MyCart, Register, Login, Pending, About, Conttact Action'lari olusturuldu. Bu action'larin View'lari acildi.
 
-25- 
+25- About, Contact, Regisster sayfalari tamamlandi.
+
+***Login'de giris yapma hatasi var!!
+
+26- Index ve MyCart haricinde proje tamamlandi.

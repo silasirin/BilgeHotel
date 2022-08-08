@@ -69,3 +69,6 @@ C:\Users\Sıla Şirin\Desktop\BilgeHotel\MVC\bin\DAL.pdb
 C:\Users\Sıla Şirin\Desktop\BilgeHotel\MVC\bin\DAL.dll.config
 C:\Users\Sıla Şirin\Desktop\BilgeHotel\MVC\bin\EntityFramework.xml
 C:\Users\Sıla Şirin\Desktop\BilgeHotel\MVC\bin\EntityFramework.SqlServer.xml
+C:\Users\Sıla Şirin\Desktop\BilgeHotel\MVC\bin\WinUI.exe
+C:\Users\Sıla Şirin\Desktop\BilgeHotel\MVC\bin\WinUI.pdb
+C:\Users\Sıla Şirin\Desktop\BilgeHotel\MVC\bin\WinUI.exe.config

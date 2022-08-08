@@ -1,7 +1,105 @@
-﻿@{
+﻿@model List<DAL.Entity.Calisan>
+@{
     ViewBag.Title = "About";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<!DOCTYPE html>
+<html>
+<body>
+    <!-- our team section start -->
+    <section class="thmv-instagram-feed thmv-our-team">
+        <div class="container">
+            <div class="row">
+                <div class="thmv-insta-feed-info w-75 mx-auto text-center">
+                    <div>
 
-<p>Use this area to provide additional information.</p>
+                        <img src="~/Content/images/our-team/team-member-3.jpg" style="max-width: 150px; height: auto;" />
+                    </div>
+                    <h4><strong>S</strong>akıp <strong>B</strong>ilge</h4>
+                    <p>Otel Sahibi</p>
+                    <br />
+                </div>
+                <div class="thmv-sec-title text-center">
+                    <h4 class="thmv-title-effect-center text-uppercase">Çalışanlarımız</h4>
+                </div>
+                <br /><br />
+                <div class="thmv-insta-feed-info w-75 mx-auto text-center">
+                    <p>Otelimizde 7 resepsiyon görevlisi, 11 temizlik görevlisi, 11 aşçı, 13 garson, 1 elektrikçi, 1 bilgi işlem sorumlusu bulunmaktadır.</p>
+                    <br /><br />
+                </div>
+            </div>
+
+            <div>
+                <section class="panel">
+                    <header class="panel-heading">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <h5>ÇALIŞANLARIMIZ</h5>
+                            </div>
+                        </div>
+
+                    </header>
+                    <table class="table table-striped table-advance table-hover">
+                        <thead>
+                            <tr>
+                                <th>Ad</th>
+                                <th>Soyad</th>
+                                <th>Görev</th>
+                                <th>Mail Adresi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var calisan in Model)
+                            {
+                                <tr>
+                                    <td>@calisan.CalisanAd</td>
+                                    <td>@calisan.CalisanSoyad</td>
+                                    <td>@calisan.Gorev</td>
+                                    <td>@calisan.Email</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+
+        </div>
+    </section>
+    <!-- our team section end -->
+    <!-- Footer section start -->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-body">
+                        <h6>Hakkımızda</h6>
+                        <p>
+                            Misafirlerimizin konaklama ihtiyaçlarını karşılayabilen uygun fiyat / kalite politikalı bir otel olmaktan gurur duyuyoruz. Amacımız, en yüksek kalitede konaklama hissiyatı ve hizmetlerini, bütçe dahilinizde, güzel müşteri hizmetleri ile birlikte sunmaktır.
+                            Müşterilerimin gönül rahatlığı için her anlamda tasarruf sağlatacak konaklama hizmetini sunuyoruz. Özel günler için detay sormak için lütfen arayınız.
+
+                            Bilge Hotel, farklı odalarla farklı fiyat yelpazesi sunmaktadır. Ekibimiz, en az 8 yıldır sektörde olan yüksek nitelikli profesyonellerden oluşmaktadır. Otelcilik sektörüyle ilgilenirken kapsamlı bir deneyim de kazandık.
+                        </p>
+                        <br />
+                        <h6>About Us</h6>
+                        <p>
+                            Our company provides a full spectrum of work of any level of complexity. Our team consists of highly qualified professionals, who have been in the industry for no less than 6 years. We have gained extensive experience while solving the most complex technical and organizational tasks, what allows us to provide you with the best service.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Right side floting buttons -->
+    <div class="container" style="text-align:center">
+        <div class="thmv-home-side thmv-home-floting-btn">
+            <a href="#" id="home-top" class="thmv-backto-top-sticky">
+                <br />
+                <i class="fas fa-chevron-up"></i>Yukari Git
+            </a>
+        </div>
+    </div>   
+</body>
+</html>
+

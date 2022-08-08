@@ -1,0 +1,42 @@
+﻿@model UserVM
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-5">
+            <div class="card shadow-lg border-0 rounded-lg mt-5">
+                <div class="card-header"><h3 class="text-center font-weight-light my-4">Giriş Yap</h3></div>
+                <div class="card-body">
+                    <form method="post">                     
+                        <div>
+                            <label>Email:</label>
+                            @Html.ValidationMessageFor(x => x.Email)
+                            <br />
+                            @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+                        </div>
+                        <div>
+                            <label>Şifre:</label>
+                            @Html.ValidationMessageFor(x => x.Sifre)
+                            <br />
+                            @Html.TextBoxFor(x => x.Sifre, new { @class = "form-control" })
+                        </div>
+                        <br />
+                        <button type="submit" class="btn btn-primary btn-block mt-3">Giriş Yap</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+<br>
+<br />
+<br>
+<br />
+<br>
+<br />
+<br>

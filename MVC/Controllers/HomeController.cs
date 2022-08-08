@@ -16,6 +16,7 @@ namespace MVC.Controllers
     {
         ProjectContext db = new ProjectContext();
         MusteriBilgisiConcrete musteriConcrete = new MusteriBilgisiConcrete();
+        CalisanConcrete calisanConcrete = new CalisanConcrete();
 
         public ActionResult Index()
         {
@@ -26,7 +27,7 @@ namespace MVC.Controllers
         {
             ViewBag.Message = "Your application description page.";
 
-            return View();
+            return View(calisanConcrete.GetList());
         }
 
         public ActionResult Contact()
@@ -48,13 +49,17 @@ namespace MVC.Controllers
             if (ModelState.IsValid)
             {
                 MusteriBilgisi appUser = new MusteriBilgisi();
+                appUser.Ad = userVM.Ad;
+                appUser.Soyad = userVM.Soyad;
+                appUser.TCKN = userVM.TCKN;
+                appUser.TelNo = userVM.TelNo;
                 appUser.Email = userVM.Email;
                 appUser.Sifre = userVM.Sifre;
                 var result = musteriConcrete.Create(appUser);
                 TempData["info"] = result;
 
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Pending");
 
             }
             else
@@ -92,7 +97,7 @@ namespace MVC.Controllers
                 ci.TatilPaketi = tatilPaketi.TatilTipi;
                 ci.TatilPaketiFiyati = tatilPaketi.Fiyat;
                 c.AddRoom(ci);
-                Session["scard"] = c;
+                Session["scart"] = c;
 
                 return RedirectToAction("Index");
             }
@@ -132,6 +137,11 @@ namespace MVC.Controllers
         }
 
         //Login islemleri
+        public ActionResult Login()
+        {
+            return View();
+        }
+
         [HttpPost]
         public ActionResult Login(UserVM userVM)
         {
@@ -144,16 +154,18 @@ namespace MVC.Controllers
                         MusteriBilgisi user = db.MusteriBilgileri.Where(x => x.Email == userVM.Email && x.Sifre == userVM.Sifre).FirstOrDefault();
 
                         Session["scart"] = user;
-                        return RedirectToAction("MyCart");
+
+                        return RedirectToAction("Index");
                     }
                     else
                     {
-                        TempData["error"] = "Kullanici adi ve sifre hatali!";
+                        TempData["error"] = "Email ve şifre hatalı!";
                         return View(userVM);
                     }
                 }
-                catch (Exception)
+                catch
                 {
+
                     return View();
                 }
             }
@@ -161,6 +173,19 @@ namespace MVC.Controllers
             {
                 return View(userVM);
             }
+        }
+
+        public ActionResult Pending(UserVM userVM)
+        {
+            if (userVM != null)
+            {
+                return View(userVM);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+
         }
 
     }

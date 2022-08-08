@@ -1,17 +1,67 @@
 ﻿@{
     ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
-
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
-
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+<!-- getin touch section start -->
+<section class="thmv-get-in-touch thmv-bg-dark">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 col-md-12 thmv-contact-info">
+                <div class="thmv-info-title">
+                    <h2 class="text-capitalize thmv-title-effect-light">İletişim Bilgilerimiz</h2>
+                    <br /><br />
+                </div>
+                <ul>
+                    <li>
+                        <div class="thmv-info-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <div>
+                            <h5>Telefon Numaramız:</h5>
+                            <p><a href="tel:(000)0000000">(216) 347 21 21</a></p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="thmv-info-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h5>Mail Adresimiz:</h5>
+                            <p><a href="mailto:info@bilgehotel.com">info@bilgehotel.com</a></p>
+                        </div>                       
+                    </li>
+                    <li>
+                        <div>
+                            <h5>Adresimiz:</h5>
+                            <p>Caferağa, Mühürdar Cd. No:76, 34710</p>
+                            <p>Kadıköy/İstanbul</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-6 col-md-8 mx-auto offset-lg-1 thmv-contact-form">
+                <div class="thmv-form-title">
+                    <h2 class="text-capitalize thmv-title-effect-light">Bizimle İletişime Geçin</h2>
+                </div>
+                <form class="row g-4 has-validation">
+                    <div class="col-md-12">
+                        <input required="" type="text" class="form-control" id="yourname" placeholder="*Adınız">
+                    </div>
+                    <div class="col-md-12">
+                        <input required="" type="tel" id="phone" class="form-control" name="phone" placeholder="*Tel No">
+                    </div>
+                    <div class="col-md-12">
+                        <input required="" type="email" class="form-control" id="youremail" placeholder="*Mail Adresiniz">
+                    </div>
+                    <div class="fcol-md-12">
+                        <textarea class="form-control" placeholder="*Mesajınız" id="floatingTextarea2" style="height: 180px"></textarea>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn-full-filled-light btn btn-primary w-100">Mesaj Gönder</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- getin touch section end -->
