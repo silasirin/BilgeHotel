@@ -19,12 +19,17 @@ namespace MVC.Models
 
         public void AddRoom(CartItemVM cartItem)
         {
-            if (_myCart.ContainsKey(cartItem.OdaID)) //Eger eklenen urunun ID'sini iceriyorsa, adeti artir.
-            {
-                _myCart[cartItem.OdaID].OdaSayisi += cartItem.OdaSayisi;
-                return;
-            }
             _myCart.Add(cartItem.OdaID, cartItem); //Eger eklenen urunun ID'sini icermiyorsa, urunu ekle
+        }
+
+        public void AddPackage (CartItemVM cartItem)
+        {
+            //if (_myCart.ContainsKey(cartItem.TatilPaketID))
+            //{
+            //    _myCart[cartItem.TatilPaketID].GunSayisi += cartItem.GunSayisi;
+            //    return;
+            //}
+            _myCart.Add(cartItem.TatilPaketID, cartItem); //Eger eklenen urunun ID'sini icermiyorsa, urunu ekle
         }
     }
 }

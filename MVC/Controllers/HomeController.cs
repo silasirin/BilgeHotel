@@ -20,6 +20,10 @@ namespace MVC.Controllers
 
         public ActionResult Index()
         {
+            TempData["odalar"] = db.Odalar.OrderBy(x => x.OdaID).ToList();
+            TempData["tatil"] = db.TatilPaketleri.OrderBy(x => x.TatilPaketiID).ToList();
+
+            TempData.Keep();
             return View();
         }
 
@@ -74,6 +78,7 @@ namespace MVC.Controllers
             try
             {
                 TatilPaketi tatilPaketi = new TatilPaketi();
+                RezervasyonBilgisi rezervasyon = new RezervasyonBilgisi();
                 Oda oda = db.Odalar.Find(id);
 
                 CartVM c = null;
@@ -95,8 +100,13 @@ namespace MVC.Controllers
                 ci.OdaTuru = oda.OdaTuru;
                 ci.OdaTuruFiyati = oda.Fiyat;
                 ci.TatilPaketi = tatilPaketi.TatilTipi;
+                ci.TatilPaketID = tatilPaketi.TatilPaketiID;
                 ci.TatilPaketiFiyati = tatilPaketi.Fiyat;
+                ci.TatilBaslangic = rezervasyon.KonaklamaBaslangic;
+                ci.TatilBaslangic = rezervasyon.KonaklamaBitis;
+                ci.GunSayisi = rezervasyon.GunSayisi;
                 c.AddRoom(ci);
+                c.AddPackage(ci);
                 Session["scart"] = c;
 
                 return RedirectToAction("Index");
@@ -131,7 +141,7 @@ namespace MVC.Controllers
                 oda.OdaSayisi -= item.OdaSayisi; //stogu adet kadar dusur
                 db.Entry(oda).State = System.Data.Entity.EntityState.Modified; //degisiklikleri sisteme modifiye et.
                 db.SaveChanges(); //kaydet
-                Session.Remove("scart"); //scard isimli session'i bosalt.
+                Session.Remove("scart"); //scart isimli session'i bosalt.
             }
             return View();
         }
@@ -143,15 +153,15 @@ namespace MVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(UserVM userVM)
+        public ActionResult Login(LoginUserVM LoginUserVM)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    if (db.MusteriBilgileri.Any(x => x.Email == userVM.Email && x.Sifre == userVM.Sifre))
+                    if (db.MusteriBilgileri.Any(x => x.Email == LoginUserVM.Email && x.Sifre == LoginUserVM.Sifre))
                     {
-                        MusteriBilgisi user = db.MusteriBilgileri.Where(x => x.Email == userVM.Email && x.Sifre == userVM.Sifre).FirstOrDefault();
+                        MusteriBilgisi user = db.MusteriBilgileri.Where(x => x.Email == LoginUserVM.Email && x.Sifre == LoginUserVM.Sifre).FirstOrDefault();
 
                         Session["scart"] = user;
 
@@ -159,8 +169,8 @@ namespace MVC.Controllers
                     }
                     else
                     {
-                        TempData["error"] = "Email ve şifre hatalı!";
-                        return View(userVM);
+                        TempData["girisHata"] = "Email veya şifre hatalı!";
+                        return View(LoginUserVM);
                     }
                 }
                 catch
@@ -171,7 +181,7 @@ namespace MVC.Controllers
             }
             else
             {
-                return View(userVM);
+                return View(LoginUserVM);
             }
         }
 

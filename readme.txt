@@ -46,16 +46,16 @@ BILGE ADAM RESORT MVC PROJESI
 
 20- MVC katmanina Entity Framework kuruldu, DAL ve BLL katmanlarindan referans verildi.
 
-21- MVC katmaninda, müsterilerin login islemlerini gerceklestirebilmeleri icin Models klasoru icerisinde UserVM adinda bir class olusturuldu. Burada email ve sifre bilgileri bulunuyor.
+21- MVC katmaninda, müsterilerin login islemlerini gerceklestirebilmeleri icin Models klasoru icerisinde UserVM adinda bir class olusturuldu. Burada email ve sifre bilgileri bulunuyor. Ayný sekilde LoginUserVm class'i da login islemleri icin kullaniliyor.
 
 22- Kullanicinin rezervasyon yaptirdiktan sonra ayirttigi oda bilgilerine ve fiyatina ulasabilmesi icin Models klasoru icerisinde CartItemVM adinda bir class olusturuldu.
 
 23- Cart'a rezervasyon bilgileri eklenirken kullanilmasi icin CartVM class'i olusturuldu.
 
-24- HomeController icerisinde musteri girisi icin Index, MyCart, Register, Login, Pending, About, Conttact Action'lari olusturuldu. Bu action'larin View'lari acildi.
+24- HomeController icerisinde musteri girisi icin Index, MyCart, Register, Login, Pending, About, Contact Action'lari olusturuldu. Bu action'larin View'lari acildi.
 
-25- About, Contact, Regisster sayfalari tamamlandi.
-
-***Login'de giris yapma hatasi var!!
+25- About, Contact, Register ve login sayfalari tamamlandi.
 
 26- Index ve MyCart haricinde proje tamamlandi.
+
+27- 

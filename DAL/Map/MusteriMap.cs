@@ -12,7 +12,7 @@ namespace DAL.Map
     {
         public MusteriMap()
         {
-            ToTable("dbo.Musteriler");
+            ToTable("dbo.MusteriBilgileri");
             HasKey(x => x.MusteriID);
             Property(x => x.MusteriID).IsRequired();
             Property(x => x.TCKN).HasMaxLength(11).IsRequired(); 
