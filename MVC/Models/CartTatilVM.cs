@@ -5,7 +5,7 @@ using System.Web;
 
 namespace MVC.Models
 {
-    public class CartVM
+    public class CartTatilVM
     {
         Dictionary<int, CartItemVM> _myCart = new Dictionary<int, CartItemVM>();
 
@@ -16,17 +16,14 @@ namespace MVC.Models
                 return _myCart.Values.ToList();
             }
         }
-
-        public void AddRoom(CartItemVM cartItem)
+        public void AddPackage(CartItemVM cartItem)
         {
-            if (_myCart.ContainsKey(cartItem.OdaID)) //Eger eklenen urunun ID'sini iceriyorsa, adeti artir.
+            if (_myCart.ContainsKey(cartItem.TatilPaketID)) //Eger eklenen urunun ID'sini iceriyorsa, adeti artir.
             {
-                _myCart[cartItem.OdaID].GunSayisi = cartItem.GunSayisi;
+                _myCart[cartItem.TatilPaketID].GunSayisi = cartItem.GunSayisi;
                 return;
             }
-            _myCart.Add(cartItem.OdaID, cartItem); //Eger eklenen urunun ID'sini icermiyorsa, urunu ekle
+            _myCart.Add(cartItem.TatilPaketID, cartItem); //Eger eklenen urunun ID'sini icermiyorsa, urunu ekle
         }
-
-        
     }
 }

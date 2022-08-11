@@ -1,0 +1,40 @@
+﻿@model CartItemVM
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<main>
+    <section>
+        <div class="text-secondary px-4 py-5 text-center">
+            <div class="py-5">
+                <div class="col-lg-6 mx-auto">
+                    <h3 style="color:midnightblue">TARİH SEÇİNİZ</h3>
+                    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+
+                        <div class="card-body">
+                            <form method="post">
+                                Giriş:
+                                <br />
+                                <input type="date" name="rez" class="form-control" />
+                                <br />
+                                Çıkış:
+                                <br />
+                                <input type="date" name="rez" class="form-control" />
+                                <br /><br />
+                                <button type="submit" class="btn btn-primary btn-block mt-3">Rezervasyonu Oluştur</button>
+                            </form>
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+</main>
+
+
+

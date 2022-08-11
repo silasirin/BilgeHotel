@@ -2,6 +2,7 @@
 using BLL.Repository;
 using DAL.Context;
 using DAL.Entity;
+using MVC.CustomFilters;
 using MVC.Models;
 using System;
 using System.Collections.Generic;
@@ -11,20 +12,32 @@ using System.Web.Mvc;
 
 namespace MVC.Controllers
 {
-    
+    //[AuthFilter]
     public class HomeController : Controller
     {
         ProjectContext db = new ProjectContext();
         MusteriBilgisiConcrete musteriConcrete = new MusteriBilgisiConcrete();
         CalisanConcrete calisanConcrete = new CalisanConcrete();
 
+       
         public ActionResult Index()
         {
             TempData["odalar"] = db.Odalar.OrderBy(x => x.OdaID).ToList();
+
+            TempData.Keep();
+            return View();
+        }
+        public ActionResult TatilPaketi()
+        {
             TempData["tatil"] = db.TatilPaketleri.OrderBy(x => x.TatilPaketiID).ToList();
 
             TempData.Keep();
             return View();
+        }
+        public ActionResult Tarih()
+        {
+           
+            return RedirectToAction("MyCart");
         }
 
         public ActionResult About()
@@ -73,13 +86,13 @@ namespace MVC.Controllers
         }
 
         //Cart'a ekleme islemleri
-        public ActionResult AddToCart(int id)
+        public ActionResult AddRoomToCart(int id)
         {
             try
             {
-                TatilPaketi tatilPaketi = new TatilPaketi();
                 RezervasyonBilgisi rezervasyon = new RezervasyonBilgisi();
                 Oda oda = db.Odalar.Find(id);
+               
 
                 CartVM c = null;
 
@@ -90,7 +103,7 @@ namespace MVC.Controllers
                 }
                 else //scart isimli bir session varsa, var olan oturumu kullan
                 {
-                    c = Session["scart"] as CartVM; //scart isimli session'i cartVM olarak unboxing yap ve icerisine at.                   
+                    c = Session["scart"] as CartVM; //scart isimli session'i cartVM olarak unboxing yap ve icerisine at.
                 }
 
 
@@ -99,21 +112,54 @@ namespace MVC.Controllers
                 ci.OdaID = oda.OdaID;
                 ci.OdaTuru = oda.OdaTuru;
                 ci.OdaTuruFiyati = oda.Fiyat;
-                ci.TatilPaketi = tatilPaketi.TatilTipi;
-                ci.TatilPaketID = tatilPaketi.TatilPaketiID;
-                ci.TatilPaketiFiyati = tatilPaketi.Fiyat;
                 ci.TatilBaslangic = rezervasyon.KonaklamaBaslangic;
                 ci.TatilBaslangic = rezervasyon.KonaklamaBitis;
                 ci.GunSayisi = rezervasyon.GunSayisi;
                 c.AddRoom(ci);
-                c.AddPackage(ci);
                 Session["scart"] = c;
 
                 return RedirectToAction("Index");
             }
             catch (Exception)
             {
-                TempData["error"] = $"{id} karşılık gelen bir oda bulunamadı!";
+                return View();
+            }
+        }
+
+        public ActionResult AddPackageToCart(int id)
+        {
+            try
+            {
+                TatilPaketi tatilPaketi = db.TatilPaketleri.Find(id);
+                RezervasyonBilgisi rezervasyon = new RezervasyonBilgisi();
+                Oda oda = db.Odalar.Find(id);
+
+
+                CartVM c = null;
+
+                if (Session["scart"] == null) //oturum acilmamissa scart isimli bir session olustur.
+                {
+                    c = new CartVM();
+
+                }
+                else //scart isimli bir session varsa, var olan oturumu kullan
+                {
+                    c = Session["scart"] as CartVM; //scart isimli session'i cartVM olarak unboxing yap ve icerisine at.
+                }
+
+
+                CartItemVM ci = new CartItemVM();
+
+                ci.TatilPaketi = tatilPaketi.TatilTipi;
+                ci.TatilPaketID = tatilPaketi.TatilPaketiID;
+                ci.TatilPaketiFiyati = tatilPaketi.Fiyat;
+                c.AddRoom(ci);
+                Session["scart"] = c;
+
+                return RedirectToAction("TatilPaketi");
+            }
+            catch (Exception)
+            {
                 return View();
             }
         }
@@ -131,14 +177,13 @@ namespace MVC.Controllers
                 return RedirectToAction("Index");
             }
         }
-
+        [AuthFilter]
         public ActionResult CompleteCart()
         {
             CartVM cart = Session["scart"] as CartVM;
             foreach (var item in cart.myCart)
             {
                 Oda oda = db.Odalar.Find(item.OdaID);
-                oda.OdaSayisi -= item.OdaSayisi; //stogu adet kadar dusur
                 db.Entry(oda).State = System.Data.Entity.EntityState.Modified; //degisiklikleri sisteme modifiye et.
                 db.SaveChanges(); //kaydet
                 Session.Remove("scart"); //scart isimli session'i bosalt.

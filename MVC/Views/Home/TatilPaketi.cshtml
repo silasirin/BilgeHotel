@@ -8,27 +8,25 @@
         <div class="text-secondary px-4 py-5 text-center">
             <div class="py-5">
                 <div class="col-lg-6 mx-auto">
-                    <h1 style="color:darkblue"><br />Bilge Hotel'e hoşgeldiniz!</h1><br /><h3 style="color:midnightblue">ODALARIMIZ</h3>
+                    <h3 style="color:midnightblue">TATİL PAKETLERİ</h3>
                     <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
 
-                        
-                        <!--Oda Tipi-->
                         <div class="card-body">
                             <table id="datatablesSimple" class="table table-bordered">
                                 @*<thead>
                                     <tr>
-                                        <th>Odalar</th>
+                                        <th>Tatil Paketleri</th>
                                     </tr>
 
                                 </thead>*@
                                 <tbody>
-                                    @foreach (var oda in TempData["odalar"] as List<DAL.Entity.Oda>)
+                                    @foreach (var tatil in TempData["tatil"] as List<DAL.Entity.TatilPaketi>)
                                     {
                                         <tr>
-                                            <td>@oda.OdaTuru</td>
+                                            <td>@tatil.TatilTipi</td>
                                             <td>
                                                 <div class="text-center">
-                                                    @Html.ActionLink("Seç", "AddRoomToCart", new { id = oda.OdaID }, new { @class = "btn btn-outline-dark mt-auto" })
+                                                    @Html.ActionLink("Seç", "AddPackageToCart", new { id = tatil.TatilPaketiID }, new { @class = "btn btn-outline-dark mt-auto" })
                                                 </div>
                                             </td>
                                         </tr>
@@ -36,18 +34,10 @@
                                 </tbody>
                             </table>
                         </div>
-                        <!--Tarih-->
-
-                        @*<div>
-                            Giriş:
-                            <input type="date" class="form-control" />
-                            Çıkış:
-                            <input type="date" class="form-control" />
-                        </div>*@
-
-                        <!--Tarih Seç-->
+                       
+                       
                         <div>
-                            @Html.ActionLink("Tatil Paketi Seç","TatilPaketi","Home",null, new {@class="btn btn-outline-dark"})
+                            @Html.ActionLink("Tarih Seç", "Tarih", "Home", null, new { @class = "btn btn-outline-dark" })
                         </div>
 
                     </div>
@@ -56,3 +46,4 @@
         </div>
     </section>
 </main>
+

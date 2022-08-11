@@ -117,11 +117,15 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="CustomFilters\AuthFilter.cs" />
+    <Compile Include="CustomFilters\ExFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CartItemVM.cs" />
+    <Compile Include="Models\CartTatilVM.cs" />
     <Compile Include="Models\CartVM.cs" />
     <Compile Include="Models\LoginUserVM.cs" />
     <Compile Include="Models\UserVM.cs" />
@@ -331,6 +335,9 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Pending.cshtml" />
     <Content Include="Views\Home\CompleteCart.cshtml" />
+    <Content Include="Views\Home\TatilPaketi.cshtml" />
+    <Content Include="Views\Home\Tarih.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

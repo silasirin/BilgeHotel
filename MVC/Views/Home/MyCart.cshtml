@@ -9,47 +9,75 @@
     decimal? totalPrice = 0;
 }
 
-<div class="row">
-    <div class="col-md-9">
-        <table class="table table-responsive">
-            <thead>
+<div>
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>Tatil Paketi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in sessionCart.myCart)
+            {
+                totalPrice += item.ToplamFiyat;
                 <tr>
-                    <th>Tatil Paketi</th>
-                    <th>Oda Tipi</th>
-                    <th>Giriş Tarihi</th>
-                    <th>Çıkış Tarihi</th>
-                    <th>Toplam Fiyat</th>
+                    <td>@item.TatilPaketi</td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in sessionCart.myCart)
-                {
-                    totalPrice += item.ToplamFiyat;
-                    <tr>
-                        <td>@item.TatilPaketi</td>
-                        <td>@item.OdaTuru</td>
-                        <td>@item.TatilBaslangic</td>
-                        <td>@item.TatilBitis</td>
-                        <td>@item.ToplamFiyat</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-    <div class="col-md-3">
-        <div class="card">
-            <div class="card-header">
+            }
+        </tbody>
+    </table>
+</div>
+<div>
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>Oda Tipi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in sessionCart.myCart)
+            {
+                totalPrice += item.ToplamFiyat;
+                <tr>
+                    <td>@item.OdaTuru</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div>
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>Giriş ve Çıkış Tarihleri</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in sessionCart.myCart)
+            {
+                totalPrice += item.ToplamFiyat;
+                <tr>
+                    <td>@item.TatilBaslangic</td>
+                    <td>@item.TatilBitis</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="col-md-3">
+    <div class="card">
+        <div class="card-header">
+        </div>
+        <div class="card-body">
+            <div class="d-flex justify-content-between">
+                @*verileri yan yana yazdirmamizi saglar*@
+                <h5>Genel Toplam: </h5>
+                <h5> @totalPrice TL</h5>
             </div>
-            <div class="card-body">
-                <div class="d-flex justify-content-between">
-                    @*verileri yan yana yazdirmamizi saglar*@
-                    <h5>Genel Toplam: </h5>
-                    <h5> @totalPrice TL</h5>
-                </div>
-                <div class="col-md-12 mt-5">
-                    @Html.ActionLink("Rezervasyonu Tamamla", "CompleteCart", "Home", null, new { @class = "btn btn-primary" })
-                    @Html.ActionLink("Devam Et", "Index", "Home", null, new { @class = "btn" })
-                </div>
+            <div class="col-md-12 mt-5">
+                @Html.ActionLink("Rezervasyonu Tamamla", "CompleteCart", "Home", null, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Devam Et", "Index", "Home", null, new { @class = "btn" })
             </div>
         </div>
     </div>
