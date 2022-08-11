@@ -10,8 +10,9 @@ namespace MVC.Models
         //CardItem'dan instance alindigi anda urun adedini otomatik 1'den baslat.
         public CartItemVM()
         {
+            RezervasyonTarihi=DateTime.Now;
             OdaSayisi = 1;
-            GunSayisi = TatilBitis.Day-TatilBaslangic.Day;
+            GunSayisi = KonaklamaBitis.Day-KonaklamaBaslangic.Day;
         }
 
         //bir alisveris sepetinin ....si olur
@@ -22,8 +23,9 @@ namespace MVC.Models
         public int TatilPaketID { get; set; }
         public string TatilPaketi { get; set; }
         public decimal? TatilPaketiFiyati { get; set; }
-        public DateTime TatilBaslangic { get; set; }
-        public DateTime TatilBitis { get; set; }
+        public DateTime KonaklamaBaslangic { get; set; }
+        public DateTime KonaklamaBitis { get; set; }
+        public DateTime RezervasyonTarihi { get; set; }
         public int GunSayisi { get; set; }
         public decimal? Fiyat { get; set; } //veritabanindan gelen fiyat bos gecilebilir oldugundan dolayi buradaki fiyat ve toplamFiyat alanlarini da bos gecilebilir olmali.
 
@@ -32,7 +34,28 @@ namespace MVC.Models
         {
             get
             {
-                return GunSayisi*(OdaTuruFiyati+TatilPaketiFiyati);
+                //Rezervasyon Tarihi Konaklamadan bir aydan once yapildiysa ve Her Sey Dahil Paket secildiyse:
+                if (KonaklamaBaslangic.Day-30 > RezervasyonTarihi.Day && KonaklamaBaslangic.Day - 90 < RezervasyonTarihi.Day && TatilPaketi=="Her Şey Dahil")
+                {
+                    return (OdaTuruFiyati + TatilPaketiFiyati)*GunSayisi*0.84m;
+                }
+
+                //Rezervasyon Tarihi Konaklamadan bir aydan once yapildiysa ve Ultra Her Sey Dahil Paket secildiyse:
+                else if (KonaklamaBaslangic.Day - 30 > RezervasyonTarihi.Day  && KonaklamaBaslangic.Day - 90 < RezervasyonTarihi.Day && TatilPaketi == "Ultra Her Şey Dahil")
+                {
+                    return (OdaTuruFiyati + TatilPaketiFiyati) * GunSayisi * 0.82m;
+                }
+
+                //Rezervasyon Tarihi Konaklamadan uc aydan once yapildiysa:
+                else if (KonaklamaBaslangic.Day - 90 > RezervasyonTarihi.Day)
+                {
+                    return (OdaTuruFiyati + TatilPaketiFiyati) * GunSayisi * 0.77m;
+                }
+
+                else
+                {
+                    return (OdaTuruFiyati + TatilPaketiFiyati)*GunSayisi;
+                }
             }
         }
     }

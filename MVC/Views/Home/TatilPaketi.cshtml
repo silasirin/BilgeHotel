@@ -13,17 +13,19 @@
 
                         <div class="card-body">
                             <table id="datatablesSimple" class="table table-bordered">
-                                @*<thead>
+                                <thead>
                                     <tr>
                                         <th>Tatil Paketleri</th>
+                                        <th>Fiyat</th>
                                     </tr>
 
-                                </thead>*@
+                                </thead>
                                 <tbody>
                                     @foreach (var tatil in TempData["tatil"] as List<DAL.Entity.TatilPaketi>)
                                     {
                                         <tr>
                                             <td>@tatil.TatilTipi</td>
+                                            <td>@tatil.Fiyat</td>
                                             <td>
                                                 <div class="text-center">
                                                     @Html.ActionLink("Seç", "AddPackageToCart", new { id = tatil.TatilPaketiID }, new { @class = "btn btn-outline-dark mt-auto" })

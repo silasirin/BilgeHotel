@@ -37,7 +37,7 @@ namespace DAL.Entity
                 Oda seciliOda = db.Odalar.FirstOrDefault(x => x.OdaID == OdaID);
                 TatilPaketi seciliPaket = db.TatilPaketleri.FirstOrDefault(x => x.TatilPaketiID == TatilPaketiID);
 
-                _toplamFiyat = (seciliOda.Fiyat + seciliPaket.Fiyat) * GunSayisi;
+                _toplamFiyat = (seciliOda.Fiyat + seciliPaket.Fiyat);// * GunSayisi;
 
                 return _toplamFiyat;
 

@@ -125,8 +125,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CartItemVM.cs" />
-    <Compile Include="Models\CartTatilVM.cs" />
-    <Compile Include="Models\CartVM.cs" />
+    <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\LoginUserVM.cs" />
     <Compile Include="Models\UserVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -338,6 +337,7 @@
     <Content Include="Views\Home\TatilPaketi.cshtml" />
     <Content Include="Views\Home\Tarih.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\Home\Odalar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

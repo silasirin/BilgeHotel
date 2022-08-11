@@ -58,7 +58,8 @@ BILGE ADAM RESORT MVC PROJESI
 
 26- Index ve MyCart haricinde proje tamamlandi.
 
-**Index'te oda secilebiliyor. Ancak tatil paketi secilemiyor. MayCart'a atmiyor.
 ***Tarih secimi yapilamiyor.
 
-27- 
+27- Error ve Login islemleri icin Filter'lar eklendi.
+
+28-

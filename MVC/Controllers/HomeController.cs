@@ -19,8 +19,63 @@ namespace MVC.Controllers
         MusteriBilgisiConcrete musteriConcrete = new MusteriBilgisiConcrete();
         CalisanConcrete calisanConcrete = new CalisanConcrete();
 
-       
+        //Login islemleri
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(LoginUserVM LoginUserVM)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    if (db.MusteriBilgileri.Any(x => x.Email == LoginUserVM.Email && x.Sifre == LoginUserVM.Sifre))
+                    {
+                        MusteriBilgisi user = db.MusteriBilgileri.Where(x => x.Email == LoginUserVM.Email && x.Sifre == LoginUserVM.Sifre).FirstOrDefault();
+
+                        //Session["scart"] = user;
+
+                        return RedirectToAction("Odalar");
+                    }
+                    else
+                    {
+                        TempData["girisHata"] = "Email veya şifre hatalı!";
+                        return View(LoginUserVM);
+                    }
+                }
+                catch
+                {
+
+                    return View();
+                }
+            }
+            else
+            {
+                return View(LoginUserVM);
+            }
+        }
+
+        public ActionResult Pending(UserVM userVM)
+        {
+            if (userVM != null)
+            {
+                return View(userVM);
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
+
+        }
+
         public ActionResult Index()
+        {
+            return View();
+        }
+        public ActionResult Odalar()
         {
             TempData["odalar"] = db.Odalar.OrderBy(x => x.OdaID).ToList();
 
@@ -36,8 +91,7 @@ namespace MVC.Controllers
         }
         public ActionResult Tarih()
         {
-           
-            return RedirectToAction("MyCart");
+            return View();
         }
 
         public ActionResult About()
@@ -90,35 +144,28 @@ namespace MVC.Controllers
         {
             try
             {
-                RezervasyonBilgisi rezervasyon = new RezervasyonBilgisi();
                 Oda oda = db.Odalar.Find(id);
-               
 
-                CartVM c = null;
+                Cart c = null;
 
-                if (Session["scart"] == null) //oturum acilmamissa scart isimli bir session olustur.
+                if (Session["scart"] == null) //oturum acilmamissa scard isimli bir session olustur.
                 {
-                    c = new CartVM();
+                    c = new Cart();
 
                 }
-                else //scart isimli bir session varsa, var olan oturumu kullan
+                else //scard isimli bir session varsa, var olan oturumu kullan
                 {
-                    c = Session["scart"] as CartVM; //scart isimli session'i cartVM olarak unboxing yap ve icerisine at.
+                    c = Session["scart"] as Cart; //scard isimli session'i card olarak unboxing yap ve icerisine at.                   
                 }
-
 
                 CartItemVM ci = new CartItemVM();
-                
                 ci.OdaID = oda.OdaID;
                 ci.OdaTuru = oda.OdaTuru;
-                ci.OdaTuruFiyati = oda.Fiyat;
-                ci.TatilBaslangic = rezervasyon.KonaklamaBaslangic;
-                ci.TatilBaslangic = rezervasyon.KonaklamaBitis;
-                ci.GunSayisi = rezervasyon.GunSayisi;
-                c.AddRoom(ci);
+                ci.OdaTuruFiyati = oda.Fiyat; //Bos gecilebilir bir degere bos gecilemez bir deger aktarilamaz. bu nedenle property'ler duzeltilir.
+                c.AddRoom(ci); //oturum icerisindeki karta kart item'larini ekle.
                 Session["scart"] = c;
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Odalar");
             }
             catch (Exception)
             {
@@ -131,29 +178,26 @@ namespace MVC.Controllers
             try
             {
                 TatilPaketi tatilPaketi = db.TatilPaketleri.Find(id);
-                RezervasyonBilgisi rezervasyon = new RezervasyonBilgisi();
-                Oda oda = db.Odalar.Find(id);
 
 
-                CartVM c = null;
+                Cart c = null;
 
-                if (Session["scart"] == null) //oturum acilmamissa scart isimli bir session olustur.
-                {
-                    c = new CartVM();
+                //if (Session["scart"] == null) //oturum acilmamissa scard isimli bir session olustur.
+                //{
+                //    c = new Cart();
 
-                }
-                else //scart isimli bir session varsa, var olan oturumu kullan
-                {
-                    c = Session["scart"] as CartVM; //scart isimli session'i cartVM olarak unboxing yap ve icerisine at.
-                }
-
+                //}
+                //else //scard isimli bir session varsa, var olan oturumu kullan
+                //{
+                    c = Session["scart"] as Cart; //scard isimli session'i card olarak unboxing yap ve icerisine at.                   
+                //}
 
                 CartItemVM ci = new CartItemVM();
 
                 ci.TatilPaketi = tatilPaketi.TatilTipi;
                 ci.TatilPaketID = tatilPaketi.TatilPaketiID;
                 ci.TatilPaketiFiyati = tatilPaketi.Fiyat;
-                c.AddRoom(ci);
+                c.AddPackage(ci);
                 Session["scart"] = c;
 
                 return RedirectToAction("TatilPaketi");
@@ -164,6 +208,42 @@ namespace MVC.Controllers
             }
         }
 
+        //public ActionResult AddDateToCart()
+        //{
+            
+        //    if (ModelState.IsValid)
+        //    {
+        //        try
+        //        {
+        //            Cart c = null;
+
+        //            c = new Cart();
+        //            c = Session["scart"] as Cart; //scard isimli session'i card olarak unboxing yap ve icerisine at.                   
+
+
+        //            CartItemVM ci = new CartItemVM();
+
+        //            ci.KonaklamaBaslangic = rezervasyon.KonaklamaBaslangic;
+        //            ci.KonaklamaBitis = rezervasyon.KonaklamaBitis;
+        //            ci.GunSayisi = rezervasyon.GunSayisi;
+        //            c.AddPackage(ci);
+        //            Session["scart"] = c;
+
+        //            return RedirectToAction("Tarih");
+
+        //        }
+        //        catch
+        //        {
+        //            return View();
+        //        }
+        //    }
+        //    else
+        //    {
+        //        return View(rezervasyon);
+        //    }
+
+        //}
+
         //Cart islemleri
         public ActionResult MyCart()
         {
@@ -173,75 +253,26 @@ namespace MVC.Controllers
             }
             else
             {
-                TempData["error"] = "Oda seçimi yapınız!";
-                return RedirectToAction("Index");
+                TempData["error"] = "Tatil seçimi yapınız!";
+                return RedirectToAction("Odalar");
             }
         }
-        [AuthFilter]
         public ActionResult CompleteCart()
         {
-            CartVM cart = Session["scart"] as CartVM;
-            foreach (var item in cart.myCart)
-            {
-                Oda oda = db.Odalar.Find(item.OdaID);
-                db.Entry(oda).State = System.Data.Entity.EntityState.Modified; //degisiklikleri sisteme modifiye et.
-                db.SaveChanges(); //kaydet
-                Session.Remove("scart"); //scart isimli session'i bosalt.
-            }
+            //Cart cart = Session["scart"] as Cart;
+            db.SaveChanges();
+            Session.Remove("scart");
+            //foreach (var item in cart.myCart)
+            //{
+            //    Oda oda = db.Odalar.Find(item.OdaID);
+            //    db.Entry(oda).State = System.Data.Entity.EntityState.Modified; //degisiklikleri sisteme modifiye et.
+            //    db.SaveChanges(); //kaydet
+            //    Session.Remove("scart"); //scart isimli session'i bosalt.
+            //}
             return View();
         }
 
-        //Login islemleri
-        public ActionResult Login()
-        {
-            return View();
-        }
 
-        [HttpPost]
-        public ActionResult Login(LoginUserVM LoginUserVM)
-        {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    if (db.MusteriBilgileri.Any(x => x.Email == LoginUserVM.Email && x.Sifre == LoginUserVM.Sifre))
-                    {
-                        MusteriBilgisi user = db.MusteriBilgileri.Where(x => x.Email == LoginUserVM.Email && x.Sifre == LoginUserVM.Sifre).FirstOrDefault();
-
-                        Session["scart"] = user;
-
-                        return RedirectToAction("Index");
-                    }
-                    else
-                    {
-                        TempData["girisHata"] = "Email veya şifre hatalı!";
-                        return View(LoginUserVM);
-                    }
-                }
-                catch
-                {
-
-                    return View();
-                }
-            }
-            else
-            {
-                return View(LoginUserVM);
-            }
-        }
-
-        public ActionResult Pending(UserVM userVM)
-        {
-            if (userVM != null)
-            {
-                return View(userVM);
-            }
-            else
-            {
-                return RedirectToAction("Index");
-            }
-
-        }
 
     }
 }

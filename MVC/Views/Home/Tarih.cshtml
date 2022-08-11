@@ -15,13 +15,20 @@
                             <form method="post">
                                 Giriş:
                                 <br />
-                                <input type="date" name="rez" class="form-control" />
+                                <input type="date" id="KonaklamaBaslangic" class="form-control" />
+                                <br />
+                                <div class="text-center">
+                                    <button type="submit" id="KonaklamaBaslangic" class="btn btn-primary btn-block mt-3">Seç</button>
+                                </div>
                                 <br />
                                 Çıkış:
                                 <br />
-                                <input type="date" name="rez" class="form-control" />
+                                <input type="date" id="KonaklamaBitis" class="form-control" />
+                                <div class="text-center">
+                                    <button type="submit" id="KonaklamaBitis" class="btn btn-primary btn-block mt-3">Seç</button>
+                                </div>
                                 <br /><br />
-                                <button type="submit" class="btn btn-primary btn-block mt-3">Rezervasyonu Oluştur</button>
+                                @Html.ActionLink("Rezervasyon Oluştur", "MyCart", "Home", null, new { @class = "btn btn-outline-dark" })
                             </form>
                         </div>
 
@@ -31,7 +38,6 @@
 
                 </div>
             </div>
-        </div>
         </div>
     </section>
 </main>

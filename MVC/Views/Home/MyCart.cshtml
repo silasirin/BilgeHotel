@@ -1,14 +1,31 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "MyCart";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 
 
-    CartVM sessionCart = Session["scart"] as CartVM; //Unboxing
+    Cart sessionCart = Session["scart"] as Cart; //Unboxing
     decimal? totalPrice = 0;
 }
 
+<div>
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>Seçili Oda</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in sessionCart.myCart)
+            {
+                totalPrice += item.ToplamFiyat;
+                <tr>
+                    <td>@item.OdaTuru</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 <div>
     <table class="table table-responsive">
         <thead>
@@ -27,24 +44,7 @@
         </tbody>
     </table>
 </div>
-<div>
-    <table class="table table-responsive">
-        <thead>
-            <tr>
-                <th>Oda Tipi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in sessionCart.myCart)
-            {
-                totalPrice += item.ToplamFiyat;
-                <tr>
-                    <td>@item.OdaTuru</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
+
 <div>
     <table class="table table-responsive">
         <thead>
@@ -57,8 +57,8 @@
             {
                 totalPrice += item.ToplamFiyat;
                 <tr>
-                    <td>@item.TatilBaslangic</td>
-                    <td>@item.TatilBitis</td>
+                    <td>@item.KonaklamaBaslangic</td>
+                    <td>@item.KonaklamaBitis</td>
                 </tr>
             }
         </tbody>

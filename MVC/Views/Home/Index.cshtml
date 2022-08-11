@@ -3,56 +3,30 @@
     ViewBag.Title = "Home Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<main>
-    <section>
-        <div class="text-secondary px-4 py-5 text-center">
-            <div class="py-5">
-                <div class="col-lg-6 mx-auto">
-                    <h1 style="color:darkblue"><br />Bilge Hotel'e hoşgeldiniz!</h1><br /><h3 style="color:midnightblue">ODALARIMIZ</h3>
-                    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-
-                        
-                        <!--Oda Tipi-->
-                        <div class="card-body">
-                            <table id="datatablesSimple" class="table table-bordered">
-                                @*<thead>
-                                    <tr>
-                                        <th>Odalar</th>
-                                    </tr>
-
-                                </thead>*@
-                                <tbody>
-                                    @foreach (var oda in TempData["odalar"] as List<DAL.Entity.Oda>)
-                                    {
-                                        <tr>
-                                            <td>@oda.OdaTuru</td>
-                                            <td>
-                                                <div class="text-center">
-                                                    @Html.ActionLink("Seç", "AddRoomToCart", new { id = oda.OdaID }, new { @class = "btn btn-outline-dark mt-auto" })
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                        <!--Tarih-->
-
-                        @*<div>
-                            Giriş:
-                            <input type="date" class="form-control" />
-                            Çıkış:
-                            <input type="date" class="form-control" />
-                        </div>*@
-
-                        <!--Tarih Seç-->
-                        <div>
-                            @Html.ActionLink("Tatil Paketi Seç","TatilPaketi","Home",null, new {@class="btn btn-outline-dark"})
-                        </div>
-
-                    </div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div>
+            <div class="card shadow-lg border-0 rounded-lg mt-5">
+                <div class="card-body" style="text-align:center">
+                    <p><h1 style="color:darkblue"><strong>BİLGE HOTEL'E HOŞGELDİNİZ</strong></h1></p>
+                    <a style="color:midnightblue" href="/Home/Login"><h2>Oda Seçimi için Giriş Yapınız</h2></a>
                 </div>
             </div>
         </div>
-    </section>
-</main>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
